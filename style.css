@@ -14,6 +14,7 @@
 
 }
 #board {
+ 
  background: linear-gradient(rgb(182, 229, 182), rgb(226, 226, 173));
  height: 92vmin;
  width: 90vmin;
@@ -22,14 +23,33 @@
  grid-template-columns: repeat(18,1fr);
  grid-template-rows: repeat(18,1fr);
 }
-.head{
-  background-color: red;
+.head {
+  background-color: #ff4d4d; /* Bright red for visibility */
+  border-radius: 10%; /* Match the shape of .snake */
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Glow effect */
 }
 
-.food{
-  background-color: yellow;
+.food {
+  background-color: #ffeb3b; /* Bright yellow for visibility */
+  border-radius: 50%; /* Circular shape */
+  box-shadow: 0 0 10px rgba(255, 235, 59, 0.5); /* Glow effect */
 }
 
-.snake{
-  background-color: purple;
+.snake {
+  background-color: #9c27b0; /* Vibrant purple */
+  border-radius: 10%; /* Slightly rounded corners */
+  box-shadow: 0 0 10px rgba(156, 39, 176, 0.5); /* Glow effect */
+}
+
+#score {
+  position: absolute;
+  top: 25px; /* Slightly below the top of the body */
+  right: 22%; /* Slightly away from the right edge */
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+  padding: 10px; /* Padding for better visibility */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1.2rem; /* Slightly larger font size */
+  font-weight: bold; /* Bold text */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  z-index: 10; /* Ensure it appears above the background image */
 }

@@ -2,10 +2,13 @@
 
 let inputDir = {x:0, y:0};
 const board = document.getElementById('board');
+const sc = document.getElementById('score');
+
 const foodSound = new Audio("food.mp3");
 const moveSound = new Audio("move.mp3");
 const gameOverSound = new Audio("gameover.mp3");
 const musicSound = new Audio("music.mp3");
+
 let speed = 2; 
 let lastPaintTime = 0;
 let snakeArr = [
@@ -17,6 +20,7 @@ let score = 0;
 //game Functions
 
 function main(ctime){
+  
   window.requestAnimationFrame(main);
   if((ctime-lastPaintTime)/1000 < 1/speed){
     return;
@@ -25,11 +29,21 @@ function main(ctime){
   gameEngine();
 } 
 
-function isCollide(sarr){
+function isCollide(snake){
+  for(i = 1 ; i < snakeArr.length ; i++){
+    if(snake[i].x === snake[0].x && (snake[i].y === snake[0].y )){
+      return true;
+    }
+  }
+
+  if(snake[0].x >= 18 || snake[0].x <= 0 || snake[0].y <= 0 || snake[0].y >= 18){
+    return true;
+  }
   return false;
 }
 
 function gameEngine(){
+  musicSound.play();
   //Part1: Update the snake array and food;
   if(isCollide(snakeArr)){
     gameOverSound.play();
@@ -40,8 +54,14 @@ function gameEngine(){
     musicSound.play();
     score = 0;
   }
+  //scoreupdate
+  sc.innerHTML = `Score: ${score}`
+
+  //if snake eats the food
 
   if(snakeArr[0].x == food.x && snakeArr[0].y == food.y){
+    score+=1;
+    foodSound.play()
     snakeArr.unshift({x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y});
     let a = 2;
     let b = 16;
@@ -55,6 +75,7 @@ function gameEngine(){
   }
   snakeArr[0].x = snakeArr[0].x + inputDir.x;
   snakeArr[0].y = snakeArr[0].y + inputDir.y;
+
   //Part2: Render it on the screen
   //Display the snake: 
 
@@ -86,6 +107,7 @@ function gameEngine(){
 //Main logic starts here
 
 window.requestAnimationFrame(main);
+
 
 window.addEventListener('keydown', e=>{
   inputDir = {x:0, y:1};
