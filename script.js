@@ -2,20 +2,22 @@
 
 let inputDir = {x:0, y:0};
 const board = document.getElementById('board');
-const sc = document.getElementById('score');
+const sc = document.getElementById('scoreBox');
+const hi = document.getElementById('hiscoreBox');
 
 const foodSound = new Audio("food.mp3");
 const moveSound = new Audio("move.mp3");
 const gameOverSound = new Audio("gameover.mp3");
 const musicSound = new Audio("music.mp3");
 
-let speed = 2; 
+let speed = 4; 
 let lastPaintTime = 0;
 let snakeArr = [
   {x: 13, y: 15}
 ]
 let food = {x: 6, y: 7};
 let score = 0; 
+let hiscore = 0;
 
 //game Functions
 
@@ -55,12 +57,27 @@ function gameEngine(){
     score = 0;
   }
   //scoreupdate
-  sc.innerHTML = `Score: ${score}`
+  sc.innerHTML = `Score: ${score}`;
 
+ let hiscore = localStorage.getItem("hiscore");
+ if(hiscore === null){
+  let hiscoreVal = 0;
+  localStorage.setItem("hiscore", JSON.stringify(hiscoreVal));
+ }else{
+    hiscoreVal = JSON.parse(hiscore);
+    hi.innerHTML = `Hi score: ${hiscoreVal}`;
+ }
+  
+ 
+  
   //if snake eats the food
 
   if(snakeArr[0].x == food.x && snakeArr[0].y == food.y){
     score+=1;
+    if (score>hiscoreVal){
+      hiscoreVal = score;
+      localStorage.setItem("hiscore", JSON.stringify(hiscoreVal));
+    }
     foodSound.play()
     snakeArr.unshift({x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y});
     let a = 2;
@@ -110,6 +127,9 @@ window.requestAnimationFrame(main);
 
 
 window.addEventListener('keydown', e=>{
+  if (e.key === "Alt" || e.key === "Tab") {
+    return; // Ignore Alt and Tab keys
+  }
   inputDir = {x:0, y:1};
   moveSound.play();
   switch (e.key) {
@@ -133,6 +153,7 @@ window.addEventListener('keydown', e=>{
       inputDir.x = -1;
       inputDir.y = 0;
       break;
+      
     default:
       break;
   }

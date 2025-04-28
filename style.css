@@ -30,7 +30,8 @@
 }
 
 .food {
-  background-color: #ffeb3b; /* Bright yellow for visibility */
+  background-color: #f0e053; 
+  border:black 1px solid;/* Bright yellow for visibility */
   border-radius: 50%; /* Circular shape */
   box-shadow: 0 0 10px rgba(255, 235, 59, 0.5); /* Glow effect */
 }
@@ -41,9 +42,22 @@
   box-shadow: 0 0 10px rgba(156, 39, 176, 0.5); /* Glow effect */
 }
 
-#score {
-  position: absolute;
+#scoreBox {
+  position: fixed;
   top: 25px; /* Slightly below the top of the body */
+  right: 22%; /* Slightly away from the right edge */
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+  padding: 10px; /* Padding for better visibility */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1.2rem; /* Slightly larger font size */
+  font-weight: bold; /* Bold text */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  z-index: 10; /* Ensure it appears above the background image */
+}
+
+#hiscoreBox {
+  position: fixed;
+  top: 100px; /* Slightly below the top of the body */
   right: 22%; /* Slightly away from the right edge */
   background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
   padding: 10px; /* Padding for better visibility */
